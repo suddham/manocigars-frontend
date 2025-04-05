@@ -14,8 +14,6 @@
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import AppHeader from '@/components/layout/AppHeader.vue'
-import AppSidebar from '@/components/layout/AppSidebar.vue'
 </script>
 
 <style lang="scss" scoped>
