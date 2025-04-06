@@ -1,9 +1,3 @@
-@use 'normalize';
-@use 'base';
-@use 'colors';
-
-html,
-body {
-  min-height: 100vh;
-  overflow: hidden;
-}
+@use 'normalize.scss';
+@use 'base.scss';
+@use 'colors.scss';

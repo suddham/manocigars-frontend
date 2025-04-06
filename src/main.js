@@ -5,8 +5,8 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 
-import { HiSun, HiMoon } from 'oh-vue-icons/icons'
-addIcons(HiSun, HiMoon);
+import { HiSun, HiMoon, HiHome, HiUser, HiCog } from 'oh-vue-icons/icons'
+addIcons(HiSun, HiMoon, HiHome, HiUser, HiCog);
 
 import App from './App.vue'
 import router from './router'

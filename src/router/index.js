@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useThemeStore } from '@/stores/theme';
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -8,6 +9,20 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      beforeEnter: (to, from, next) => {
+        const themeStore = useThemeStore();
+        themeStore.setTheme(themeStore.getTheme);
+        // todo auth
+        const isAuthenticated = false; 
+
+        if (isAuthenticated) {
+          next(); 
+        } else {
+          next(); 
+          // next({ name: 'home' }); 
+          // next({ name: 'about' }); 
+        }
+      }
     },
     {
       path: '/about',

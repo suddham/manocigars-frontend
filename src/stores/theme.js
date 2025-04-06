@@ -1,52 +1,46 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-function getInitialTheme() {
+const getInitialTheme= () => {
 	if (localStorage.getItem("theme")) {
 		return localStorage.getItem("theme");
 	} else {
-		return prefersDarkScheme ? "dark" : "light";
+		return prefersDarkScheme() ? "dark" : "light";
 	}
-}
+};
+
+const prefersDarkScheme = () => window.matchMedia("(prefers-color-scheme: dark)").matches;
+
 
 export const useThemeStore = defineStore('theme', {
 		state: ()=> ({
-			mode: getInitialTheme() 
+			theme: getInitialTheme() 
 		}),
 		getters: {
-			getTheme: (state) => state.theme.mode
+			getTheme: (state) => state.theme
 		},
 		actions: {
-		getInitialTheme() {
-			if (localStorage.getItem("theme")) {
-				return localStorage.getItem("theme");
-			} else {
-				return prefersDarkScheme ? "dark" : "light";
-			}
-		},
-
-		toggleTheme() {
-			this.mode = !this.mode.toLowerCase()
-			localStorage.setItem('theme', this.mode)
-		},
+			setThemeState(mode) {
+				this.theme = mode.toLowerCase()
+				localStorage.setItem('theme', this.theme)
+			},
 	
-		setTheme(mode) {
-			const darkMode = 'dark-mode'
-			const lightMode = 'light-mode'
-	
-			if (mode === 'light') {
-				if (document.documentElement.classList.contains(darkMode)) {
-					document.documentElement.classList.remove(darkMode)
+			setTheme(mode) {
+				const darkMode = 'dark-mode'
+				const lightMode = 'light-mode'
+				this.setThemeState(mode);
+				
+				if (mode === 'light') {
+					if (document.documentElement.classList.contains(darkMode)) {
+						document.documentElement.classList.remove(darkMode)
+					}
+					document.documentElement.classList.add(lightMode)
+				} else {
+					if (document.documentElement.classList.contains(lightMode)) {
+						document.documentElement.classList.remove(lightMode)
+					}
+					document.documentElement.classList.add(darkMode)
 				}
-				document.documentElement.classList.add(lightMode)
-			} else {
-				if (document.documentElement.classList.contains(lightMode)) {
-					document.documentElement.classList.remove(lightMode)
-				}
-				document.documentElement.classList.add(darkMode)
 			}
-		}
 		}
 	});
 
