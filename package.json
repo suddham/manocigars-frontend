@@ -1,8 +1,9 @@
 {
   "name": "manocigars",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
+  "description": "A Vue 3-based cigar tracking application with offline-first functionality",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
