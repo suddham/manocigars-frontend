@@ -57,6 +57,7 @@ const route = useRoute();
     max-width: 80px;
     img {
       border-radius: 50%;
+      max-width: inherit;
     }
   }
   &__theme {
